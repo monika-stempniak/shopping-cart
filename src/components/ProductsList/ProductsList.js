@@ -1,9 +1,10 @@
 import React from 'react';
+import Axios from 'axios';
 
 import styles from './ProductsList.module.scss';
 
-import books from "../../books.json";
-import ProductItem from "../ProductItem/ProductItem"
+import ProductItem from "../ProductItem/ProductItem";
+const { URL } = require('../../constans');
 
 class ProductsList extends React.Component {
   state = {
@@ -11,28 +12,33 @@ class ProductsList extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      books: books,
-    })
+    Axios.get(`${URL}/books`)
+      .then(response => {
+        this.setState({
+          books: response.data,
+        })
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
   }
 
   render() {
     const { books } = this.state;
     
     if (!books) {
-      return (<p>Loading...</p>);
+      return <p>Loading...</p>;
     }
-    
-    console.log(books);
 
     return (
       <div className="container">
         <h1 className={styles.title}>Books</h1>
         <div className="row">
           {
-            books.map(({ title, author }) => (
+            books.map(({ id, title, author }) => (
               <div className="col-sm-6 col-md-4" key={title}>
                 <ProductItem
+                  bookId={id}
                   title={title}
                   author={author}
                 />
