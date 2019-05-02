@@ -1,15 +1,20 @@
 import React from 'react';
+import classnames from "classnames";
 
-import './ProductItem.module.scss';
+import styles from './ProductItem.module.scss';
 
-class ProductItem extends React.Component {
-  render() {
-    return (
-      <div>
-        ProductItem
-      </div>
-    );
-  }
+const ProductItem = ({title, author}) => {
+  return (
+    <div className={styles.item}>
+      <div className={styles.image}>{title}</div>
+      <p className={styles.title}>{title}</p>
+      <p className={styles.author}>{author}</p>
+      <button 
+        type="button" 
+        className={classnames("btn", "btn-dark", styles.button)}
+      >Add to cart</button>
+    </div>
+  );
 }
 
 export default ProductItem;
