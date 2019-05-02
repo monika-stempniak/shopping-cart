@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "series": "A Song of Ice and Fire",
+    "author": "George R. R. Martin",
+    "title": "A Game of Thrones",
+    "year": "1996"
+  },
+  {
+    "id": 2,
+    "series": "A Song of Ice and Fire",
+    "author": "George R. R. Martin",
+    "title": "A Clash of Kings",
+    "year": "1999"
+  },
+  {
+    "id": 3,
+    "series": "A Song of Ice and Fire",
+    "author": "George R. R. Martin",
+    "title": "A Storm of Swords",
+    "year": "2000"
+  },
+  {
+    "id": 4,
+    "series": "A Song of Ice and Fire",
+    "author": "George R. R. Martin",
+    "title": "A Feast for Crows",
+    "year": "2005"
+  },
+  {
+    "id": 4,
+    "series": "A Song of Ice and Fire",
+    "author": "George R. R. Martin",
+    "title": "A Dance with Dragons",
+    "year": "2011"
+  }
+]
