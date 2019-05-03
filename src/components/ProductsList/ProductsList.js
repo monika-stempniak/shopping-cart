@@ -1,54 +1,40 @@
 import React from 'react';
-import Axios from 'axios';
 
 import styles from './ProductsList.module.scss';
 
 import ProductItem from "../ProductItem/ProductItem";
-const { URL } = require('../../constans');
 
 class ProductsList extends React.Component {
-  state = {
-    books: null,
-  }
-
-  componentDidUpdate(prevProps) {
-    const { books } = this.props;
-    if (prevProps.books !== books) {
-      this.setState({ books })
-    }
-  }
-
-  updateBooks = () => {
-    this.props.updateBooks();
-    this.props.updateCart();
-  }
-
   render() {
-    const { books } = this.state;
-    
+    const { books, updateBooks, updateCart, userId, checkUserID } = this.props;
+
     if (!books) {
       return <p>Loading...</p>;
     }
 
     return (
-      <div className={styles.wrapper}>
-          <h1 className={styles.title}>Books</h1>
+      <main className={styles.wrapper}>
+        <h1 className={styles.title}>Books</h1>
           <div className="row">
             {
-              books.map(({ id, title, author, amount }) => (
+              books.map(({ id, title, series, author, amount }) => (
                 <div className="col-sm-12 col-md-6 col-lg-4" key={id}>
                   <ProductItem
                     bookId={id}
                     title={title}
+                    series={series}
                     author={author}
                     amount={amount}
-                    updateBooks={this.updateBooks}
+                    updateBooks={updateBooks}
+                    updateCart={updateCart}
+                    userId={userId}
+                    checkUserID={checkUserID}
                   />
                 </div>
               ))
             }
-          </div>
-      </div>
+        </div>
+      </main>
     );
   }
 }

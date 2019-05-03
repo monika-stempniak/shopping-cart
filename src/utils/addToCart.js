@@ -1,8 +1,6 @@
 const { readFileSync, writeFile } = require('fs');
 
-const getProductsList = require('./getProductsList');
-
-function addToCart(bookId) {
+function addToCart(userId, bookId) {
   try {
     const booksJson = readFileSync('./books.json', 'utf8');
     const books = JSON.parse(booksJson);
@@ -20,27 +18,32 @@ function addToCart(bookId) {
       console.log('successfully written books.json');
     });
 
-    const cart = readFileSync('./cart.json', 'utf8');
+    const cartJson = readFileSync('./cart.json', 'utf8');
 
-    let updatedCart = [];
+    let cart = [];
+    let userCart = [];
     let isBookInCart = false;
-    if (cart) {
-      updatedCart = JSON.parse(cart);
-      isBookInCart = updatedCart.some(bookInCart => bookInCart.id === +bookId)
+    let otherUsersCart = [];
+    if (cartJson) {
+      cart = JSON.parse(cartJson);
+      userCart = cart.filter(book => book.userId === +userId);
+      isBookInCart = userCart.some(bookInCart => bookInCart.id === +bookId);
+      otherUsersCart = cart.filter(book => book.userId !== +userId)
     }
 
     if (!isBookInCart) {
-      updatedCart.push(pickedBook);
+      pickedBook.userId = +userId;
+      userCart.push(pickedBook);
     }
+
+    const allUsersCart = otherUsersCart.concat(userCart);
   
-    const cartWithBooks = JSON.stringify(updatedCart);
-  
-    writeFile('cart.json', cartWithBooks, function (err) {
+    writeFile('cart.json', JSON.stringify(allUsersCart), function (err) {
       if (err) throw err;
       console.log('successfully written cart.json');
     });
   
-    return cartWithBooks;
+    return userCart;
   } catch(error) {
     console.log(error);
   }

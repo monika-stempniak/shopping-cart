@@ -1,10 +1,8 @@
 import React from 'react';
-import Axios from 'axios';
 
 import styles from './Cart.module.scss';
 
 import CartItem from "../CartItem/CartItem";
-const { URL } = require('../../constans');
 
 class Cart extends React.Component {
   state = {
@@ -28,27 +26,26 @@ class Cart extends React.Component {
   render() {
     const { cart } = this.state;
 
-    console.log(cart);
-  
     return (
       <div className={styles.wrapper}>
         <div className={styles.container}>
           <h1 className={styles.title}>Cart</h1>
-            {
-              !cart
-              ? <p>No items</p>
-              : cart.map(({ id, title, author, amount }, index) => (
-                <CartItem
-                  key={`${id}${index}`}
-                  bookId={id}
-                  title={title}
-                  author={author}
-                  amount={amount}
-                  updateCart={this.updateCart}
-                />
-              ))
-            }
-          </div>
+          {
+            !cart || cart.length === 0
+            ? <p className={styles.emptyCart}>No items</p>
+            : cart.map(({ id, title, author, amount, userId }, index) => (
+              <CartItem
+                key={`${id}${index}`}
+                bookId={id}
+                title={title}
+                author={author}
+                amount={amount}
+                updateCart={this.updateCart}
+                userId={userId}
+              />
+            ))
+          }
+        </div>
       </div>
     );
   }

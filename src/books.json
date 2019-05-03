@@ -4,34 +4,79 @@
     "series": "A Song of Ice and Fire",
     "author": "George R. R. Martin",
     "title": "A Game of Thrones",
-    "year": "1996"
+    "year": "1996",
+    "amount": 1
   },
   {
     "id": 2,
     "series": "A Song of Ice and Fire",
     "author": "George R. R. Martin",
     "title": "A Clash of Kings",
-    "year": "1999"
+    "year": "1999",
+    "amount": 1
   },
   {
     "id": 3,
     "series": "A Song of Ice and Fire",
     "author": "George R. R. Martin",
     "title": "A Storm of Swords",
-    "year": "2000"
+    "year": "2000",
+    "amount": 1
   },
   {
     "id": 4,
     "series": "A Song of Ice and Fire",
     "author": "George R. R. Martin",
     "title": "A Feast for Crows",
-    "year": "2005"
+    "year": "2005",
+    "amount": 1
   },
   {
     "id": 5,
     "series": "A Song of Ice and Fire",
     "author": "George R. R. Martin",
     "title": "A Dance with Dragons",
-    "year": "2011"
+    "year": "2011",
+    "amount": 1
+  },
+  {
+    "id": 6,
+    "series": "The Lord of the Rings",
+    "author": "J. R. R. Tolkien",
+    "title": "The Fellowship of the Ring",
+    "year": "1954",
+    "amount": 1
+  },
+  {
+    "id": 7,
+    "series": "The Lord of the Rings",
+    "author": "J. R. R. Tolkien",
+    "title": "The Two Towers",
+    "year": "1954",
+    "amount": 1
+  },
+  {
+    "id": 8,
+    "series": "The Lord of the Rings",
+    "author": "J. R. R. Tolkien",
+    "title": "The Return of the King",
+    "year": "1955",
+    "amount": 1
+  },
+  {
+    "id": 9,
+    "series": "",
+    "author": "J. R. R. Tolkien",
+    "title": "The Hobbit",
+    "year": "1937",
+    "amount": 1
+  },
+  {
+    "id": 10,
+    "series": "",
+    "author": "J. R. R. Tolkien",
+    "title": "The Silmarillion",
+    "year": "1977",
+    "amount": 1
   }
 ]

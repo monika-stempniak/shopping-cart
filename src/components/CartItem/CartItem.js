@@ -4,14 +4,15 @@ import Axios from 'axios';
 
 import styles from './CartItem.module.scss';
 
-const { URL } = require('../../constans');
+const URL = require('../../constans');
 
 class CartItem extends React.Component {
 
   onDelete = (event) => {
     const id = event.target.id;
+    const { userId } = this.props;
 
-    Axios.delete(`${URL}/cart/${id}`)
+    Axios.delete(`${URL}/cart/${userId}/${id}`)
       .then(response => {
         this.props.updateCart(response.data);
       })
