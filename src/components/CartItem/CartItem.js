@@ -11,11 +11,9 @@ class CartItem extends React.Component {
   onDelete = (event) => {
     const id = event.target.id;
 
-    console.log(id);
-
     Axios.delete(`${URL}/cart/${id}`)
       .then(response => {
-        console.log(response.data);
+        this.props.updateCart(response.data)
       })
       .catch((error) => {
         console.log(error.message);

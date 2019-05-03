@@ -14,7 +14,7 @@ class ProductItem extends React.Component {
   onAddToCart = (event) => {
     const id = event.target.id;
 
-    Axios.get(`${URL}/books/${id}`)
+    Axios.post(`${URL}/cart/${id}`)
       .then(response => {
         console.log(response.data);
         this.setState({

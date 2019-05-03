@@ -23,6 +23,12 @@ class Cart extends React.Component {
       })
   }
 
+  updateCart = (updatedCart) => {
+    this.setState({
+      cart: updatedCart,
+    })
+  }
+
   render() {
     const { cart } = this.state;
   
@@ -38,6 +44,7 @@ class Cart extends React.Component {
                 bookId={id}
                 title={title}
                 author={author}
+                updateCart={this.updateCart}
               />
             ))
           }
