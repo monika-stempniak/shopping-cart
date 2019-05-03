@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
-const fs = require('fs');
 
-const books = require('./books.json');
 const addToCart = require('./utils/addToCart');
 const getProductsList = require('./utils/getProductsList');
 const removeFromCart = require('./utils/removeFromCart');
@@ -20,9 +18,7 @@ app.get('/:fileName', (req, res, next) => {
 app.post('/cart/:id', (req, res, next) => {
   const { id } = req.params;
   try {
-    const books = getProductsList("books");
-    const pickedBook = JSON.parse(books).find(book => +id === book.id)
-    const cart = addToCart(pickedBook);
+    const cart = addToCart(id);
     res.send(cart);
   } catch(error) {
     next(error)
@@ -32,9 +28,7 @@ app.post('/cart/:id', (req, res, next) => {
 app.delete('/cart/:id', (req, res, next) => {
   const { id } = req.params;
   try {
-    const books = getProductsList("cart");
-    const pickedBook = JSON.parse(books).find(book => +id === book.id)
-    const cart = removeFromCart(pickedBook);
+    const cart = removeFromCart(id);
     res.send(cart);
   } catch(error) {  
     next(error)

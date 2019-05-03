@@ -13,7 +13,7 @@ class CartItem extends React.Component {
 
     Axios.delete(`${URL}/cart/${id}`)
       .then(response => {
-        this.props.updateCart(response.data)
+        this.props.updateCart(response.data);
       })
       .catch((error) => {
         console.log(error.message);
@@ -21,13 +21,18 @@ class CartItem extends React.Component {
   }
 
   render() {
-    const { bookId, title, author } = this.props;
+    const { bookId, title, author, amount } = this.props;
+
+    const amountOfBooks = (amount + 1) - amount;
 
     return (
       <div className={styles.item}>
-        <div>
-          <p className={styles.title}>{title}</p>
-          <p className={styles.author}>{author}</p>
+        <div className={styles.container}>
+          <div>
+            <p className={styles.title}>{title}</p>
+            <p className={styles.author}>{author}</p>
+          </div>
+          <p className={styles.amount}>x{amountOfBooks}</p>
         </div>
         <button 
           type="button" 

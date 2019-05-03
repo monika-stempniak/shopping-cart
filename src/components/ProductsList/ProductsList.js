@@ -11,16 +11,16 @@ class ProductsList extends React.Component {
     books: null,
   }
 
-  componentDidMount() {
-    Axios.get(`${URL}/books`)
-      .then(response => {
-        this.setState({
-          books: response.data,
-        })
-      })
-      .catch((error) => {
-        console.log(error.message);
-      })
+  componentDidUpdate(prevProps) {
+    const { books } = this.props;
+    if (prevProps.books !== books) {
+      this.setState({ books })
+    }
+  }
+
+  updateBooks = () => {
+    this.props.updateBooks();
+    this.props.updateCart();
   }
 
   render() {
@@ -35,12 +35,14 @@ class ProductsList extends React.Component {
           <h1 className={styles.title}>Books</h1>
           <div className="row">
             {
-              books.map(({ id, title, author }) => (
-                <div className="col-sm-6 col-md-4" key={title}>
+              books.map(({ id, title, author, amount }) => (
+                <div className="col-sm-12 col-md-6 col-lg-4" key={id}>
                   <ProductItem
                     bookId={id}
                     title={title}
                     author={author}
+                    amount={amount}
+                    updateBooks={this.updateBooks}
                   />
                 </div>
               ))

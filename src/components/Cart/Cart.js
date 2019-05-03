@@ -8,46 +8,47 @@ const { URL } = require('../../constans');
 
 class Cart extends React.Component {
   state = {
-    cart: [],
+    cart: null,
   }
 
-  componentDidMount() {
-    Axios.get(`${URL}/cart`)
-      .then(response => {
-        this.setState({
-          cart: response.data,
-        })
-      })
-      .catch((error) => {
-        console.log(error.message);
-      })
+  componentDidUpdate(prevProps) {
+    const { cart } = this.props;
+    if (prevProps.cart !== cart) {
+      this.setState({ cart })
+    }
   }
 
   updateCart = (updatedCart) => {
     this.setState({
       cart: updatedCart,
     })
+    this.props.updateBooks();
   }
 
   render() {
     const { cart } = this.state;
+
+    console.log(cart);
   
     return (
       <div className={styles.wrapper}>
+        <div className={styles.container}>
           <h1 className={styles.title}>Cart</h1>
-          {
-            cart.length === 0
-            ? <p>No items</p>
-            : cart.map(({ id, title, author }) => (
-              <CartItem
-                key={title}
-                bookId={id}
-                title={title}
-                author={author}
-                updateCart={this.updateCart}
-              />
-            ))
-          }
+            {
+              !cart
+              ? <p>No items</p>
+              : cart.map(({ id, title, author, amount }, index) => (
+                <CartItem
+                  key={`${id}${index}`}
+                  bookId={id}
+                  title={title}
+                  author={author}
+                  amount={amount}
+                  updateCart={this.updateCart}
+                />
+              ))
+            }
+          </div>
       </div>
     );
   }

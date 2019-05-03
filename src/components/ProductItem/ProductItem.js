@@ -7,19 +7,13 @@ import styles from './ProductItem.module.scss';
 const { URL } = require('../../constans');
 
 class ProductItem extends React.Component {
-  state = {
-    isInCart: false,
-  }
 
   onAddToCart = (event) => {
     const id = event.target.id;
 
     Axios.post(`${URL}/cart/${id}`)
       .then(response => {
-        console.log(response.data);
-        this.setState({
-          isInCart: true,
-        })
+        this.props.updateBooks()
       })
       .catch((error) => {
         console.log(error.message);
@@ -27,10 +21,8 @@ class ProductItem extends React.Component {
   }
 
   render() {
-    const { bookId, title, author } = this.props;
-    const { isInCart } = this.state;
-
-    const text = isInCart ? "In cart" : "Add to cart";
+    const { bookId, title, author, amount } = this.props;
+    const isDisabled = amount === 0;
 
     return (
       <div className={styles.item}>
@@ -42,8 +34,8 @@ class ProductItem extends React.Component {
           className={classnames("btn", "btn-dark", styles.button)}
           id={bookId}
           onClick={this.onAddToCart}
-          disabled={isInCart}
-        >{text}</button>
+          disabled={isDisabled}
+        >Add to cart</button>
       </div>
     );
   }
