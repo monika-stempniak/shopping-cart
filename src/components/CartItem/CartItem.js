@@ -7,25 +7,19 @@ import styles from './CartItem.module.scss';
 const { URL } = require('../../constans');
 
 class CartItem extends React.Component {
-  state = {
-    isInCart: false,
-  }
 
   onDelete = (event) => {
     const id = event.target.id;
 
     console.log(id);
 
-    // Axios.get(`${URL}/books/${id}`)
-    //   .then(response => {
-    //     console.log(response.data);
-    //     this.setState({
-    //       isInCart: true,
-    //     })
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   })
+    Axios.delete(`${URL}/cart/${id}`)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
   }
 
   render() {

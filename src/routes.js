@@ -4,6 +4,7 @@ const fs = require('fs');
 const books = require('./books.json');
 const addToCart = require('./utils/addToCart');
 const getProductsList = require('./utils/getProductsList');
+const removeFromCart = require('./utils/removeFromCart');
 
 app.get('/:fileName', (req, res, next) => {
   const { fileName } = req.params;
@@ -27,7 +28,21 @@ app.get('/books/:id', (req, res, next) => {
   }
 });
 
-app.use((error, req, res) => {
+app.delete('/cart/:id', (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const books = getProductsList("cart");
+    const pickedBook = JSON.parse(books).find(book => +id === book.id)
+    res.send(pickedBook);
+    console.log(pickedBook);
+    removeFromCart(pickedBook);
+  } catch(error) {  
+    next(error)
+  }
+});
+
+app.use((error, req, res, next) => {
+  console.log(error.message);
   res.status(400).send(error.message);
 });
 

@@ -28,20 +28,19 @@ class Cart extends React.Component {
   
     return (
       <div className={styles.wrapper}>
-
-            <h1 className={styles.title}>Cart</h1>
-            {
-              cart.length === 0
-              ? <p>No items</p>
-              : cart.map(({ id, title, author }) => (
-                <CartItem
-                  bookId={id}
-                  title={title}
-                  author={author}
-                />
-              ))
-            }
- 
+          <h1 className={styles.title}>Cart</h1>
+          {
+            cart.length === 0
+            ? <p>No items</p>
+            : cart.map(({ id, title, author }) => (
+              <CartItem
+                key={title}
+                bookId={id}
+                title={title}
+                author={author}
+              />
+            ))
+          }
       </div>
     );
   }
