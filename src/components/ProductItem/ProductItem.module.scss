@@ -1,3 +1,6 @@
+@import "../../scss/variables.scss";
+@import "../../scss/mixins.scss";
+
 .item {
   padding: 20px 10px;
   margin: 10px 0;
@@ -8,8 +11,8 @@
 }
 
 .image {
-  background: #ddd;
-  color: #999;
+  background: $light-gray;
+  color: $medium-gray;
   font-size: 10px;
   padding: 40px 0;
   width: 70%;
@@ -19,14 +22,24 @@
 }
 
 .title {
-  color: orangered;
+  color: $orange;
   font-weight: bold;
   margin: 0;
+  font-size: 12px;
+
+  @include min(md) {
+    font-size: 16px;
+  }
 }
 
 .author {
   margin: 0;
   margin-bottom: 10px;
+  font-size: 10px;
+
+  @include min(md) {
+    font-size: 14px;
+  }
 }
 
 .button {
