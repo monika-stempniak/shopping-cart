@@ -26,8 +26,8 @@ class App extends React.Component {
       })
   }
 
-  getCart = () => {
-    Axios.get(`${URL}/cart/${this.state.userId}`)
+  getCart = (userId) => {
+    Axios.get(`${URL}/cart/${userId}`)
       .then(response => {
         this.setState({
           cart: response.data,
@@ -47,14 +47,15 @@ class App extends React.Component {
     this.getBooks();
   }
 
-  updateCart = () => {
-    this.getCart();
+  updateCart = (userId) => {
+    this.getCart(userId);
   }
 
   checkUser = (userId) => {
     const id = +userId;
     if (id && typeof id === 'number') {
-      this.setState({ userId })
+      this.setState({ userId: id })
+      this.updateCart(userId);
     } else {
       const passedId = prompt('Invalid User ID, please try again');
       this.checkUserID(passedId);
@@ -73,6 +74,11 @@ class App extends React.Component {
         <div className="row">
           <div className="col">
             <div className={styles.wrapper}>
+            {
+              userId
+              ? <span className={styles.loggedIn}>Logged in: ID {userId}</span>
+              : <span className={styles.loggedIn}>Logged out</span>
+            }
               <ProductsList 
                 books={books} 
                 updateCart={this.updateCart} 

@@ -49,7 +49,9 @@ class ProductItem extends React.Component {
           id={bookId}
           onClick={this.onAddToCart}
           disabled={isDisabled}
-        >Add to cart</button>
+        >
+          Add to cart
+        </button>
       </div>
     );
   }
