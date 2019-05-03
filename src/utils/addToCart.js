@@ -2,7 +2,7 @@ const { readFileSync, writeFile } = require('fs');
 
 function addToCart(book) {
   try {
-    const cart= readFileSync('./cart.json', 'utf8');
+    const cart = readFileSync('./cart.json', 'utf8');
 
     let updatedCart = [];
     let isBookInCart = false;

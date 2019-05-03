@@ -31,21 +31,23 @@ class ProductsList extends React.Component {
     }
 
     return (
-      <div className="container">
-        <h1 className={styles.title}>Books</h1>
-        <div className="row">
-          {
-            books.map(({ id, title, author }) => (
-              <div className="col-sm-6 col-md-4" key={title}>
-                <ProductItem
-                  bookId={id}
-                  title={title}
-                  author={author}
-                />
-              </div>
-            ))
-          }
-        </div>
+      <div className={styles.wrapper}>
+
+            <h1 className={styles.title}>Books</h1>
+            <div className="row">
+              {
+                books.map(({ id, title, author }) => (
+                  <div className="col-sm-6 col-md-4" key={title}>
+                    <ProductItem
+                      bookId={id}
+                      title={title}
+                      author={author}
+                    />
+                  </div>
+                ))
+              }
+            </div>
+         
       </div>
     );
   }
