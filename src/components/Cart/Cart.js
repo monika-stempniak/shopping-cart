@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from "classnames";
 
 import styles from './Cart.module.scss';
 
@@ -44,6 +45,16 @@ class Cart extends React.Component {
                 userId={userId}
               />
             ))
+          }
+          {
+            (cart && cart.length !== 0)
+            && <button 
+                type="button" 
+                className={classnames("btn", "btn-outline-danger", styles.button)}
+                onClick={this.onDelete}
+              >
+                Cancel shopping
+              </button>
           }
         </div>
       </div>

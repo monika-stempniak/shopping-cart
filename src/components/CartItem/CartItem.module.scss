@@ -39,6 +39,7 @@
   font-size: 10px;
   font-weight: bold;
   margin-top: 10px;
+  height: 34px;
 
   @include min(lg) {
     margin-top: 0;
