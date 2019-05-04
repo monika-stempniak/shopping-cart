@@ -1,20 +1,34 @@
 const express = require('express');
 const app = express();
+const bodyParser = require("body-parser");
 
 const addToCart = require('./utils/addToCart');
 const getCart = require('./utils/getCart');
 const getBooksList = require('./utils/getBooksList');
 const removeFromCart = require('./utils/removeFromCart');
+const addNewBook = require('./utils/addNewBook');
 
-// const checkToken = (req, res, next) => {
-//   if (req.headers.token === 'user') {
-//     next();
-//   } else {
-//     res.status(401).send("wrong password");
-//   }
-// }
+// TODO: add books to books list UI
 
-// app.use(checkToken);
+const checkToken = (req, res, next) => {
+  if (req.headers.token === 'user') {
+    next();
+  } else {
+    res.status(401).send("wrong password");
+  }
+}
+
+const useBodyParser = (bodyParser.json());
+
+app.post('/books/new', checkToken, useBodyParser, (req, res, next) => {
+  const newBook = req.body;
+  try {
+    const books = addNewBook(newBook);
+    res.send(books);
+  } catch(error) {  
+    next(error)
+  }
+});
 
 app.get('/books', (req, res, next) => {
   try {
