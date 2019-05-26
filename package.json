@@ -8,13 +8,17 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
+    "mongoose": "^5.5.11",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0"
   },
   "scripts": {
+    "server": "nodemon src/db/db.app.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
