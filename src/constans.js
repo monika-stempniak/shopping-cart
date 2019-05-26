@@ -1,3 +1,1 @@
-const URL = 'http://localhost:4000';
-
-module.exports = URL;
+export const API_URL = 'http://localhost:4000';
