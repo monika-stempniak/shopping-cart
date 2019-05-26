@@ -1,27 +1,49 @@
-import React from 'react';
+import Axios from 'axios';
 import classnames from "classnames";
+import React from 'react';
+
+import { API_URL } from '../../constans';
+import CartItem from "../CartItem/CartItem";
 
 import styles from './Cart.module.scss';
 
-import CartItem from "../CartItem/CartItem";
-
 class Cart extends React.Component {
   state = {
-    cart: null,
+    cart: [],
   }
 
-  componentDidUpdate(prevProps) {
-    const { cart } = this.props;
-    if (prevProps.cart !== cart) {
-      this.setState({ cart })
+  componentDidMount() {
+    this.getCart();
+  }
+
+  getCart = async () => {
+    try {
+      const response = await Axios.get(`${API_URL}/cart`);
+      const data = await response.data;
+      this.setState({
+        cart: data,
+      })
+    } catch (error) {
+      console.log(error.message);
     }
   }
 
-  updateCart = (updatedCart) => {
+  updateCart = (id) => {
+    const { cart } = this.state;
+
     this.setState({
-      cart: updatedCart,
+      cart: cart.filter(book => book._id !== id )
     })
-    this.props.updateBooks();
+  }
+
+  onDelete = async () => {
+    try {
+      const response = await Axios.delete(`${API_URL}/cart`);
+      const data = await response.data;
+      data && this.setState({ cart: [] })
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   render() {
@@ -29,33 +51,35 @@ class Cart extends React.Component {
 
     return (
       <div className={styles.wrapper}>
-        <div className={styles.container}>
+        <div className="container">
           <h1 className={styles.title}>Cart</h1>
-          {
-            !cart || cart.length === 0
-            ? <p className={styles.emptyCart}>No items</p>
-            : cart.map(({ id, title, author, amount, userId }, index) => (
-              <CartItem
-                key={`${id}${index}`}
-                bookId={id}
-                title={title}
-                author={author}
-                amount={amount}
-                updateCart={this.updateCart}
-                userId={userId}
-              />
-            ))
-          }
-          {
-            (cart && cart.length !== 0)
-            && <button 
-                type="button" 
-                className={classnames("btn", "btn-outline-danger", styles.button)}
-                onClick={this.onDelete}
-              >
-                Cancel shopping
-              </button>
-          }
+          <div className="row">
+            <div className="col-12">
+              <div className={styles.container}>
+                {
+                  cart.length === 0
+                  ? <p className={styles.emptyCart}>No items</p>
+                  : cart.map((cart) => (
+                    <CartItem
+                      key={cart._id}
+                      {...cart}
+                      updateCart={this.updateCart}
+                    />
+                  ))
+                }
+              </div>
+              {
+                cart.length !== 0 &&
+                <button 
+                  type="button" 
+                  className={classnames("btn", "btn-outline-danger", styles.button)}
+                  onClick={this.onDelete}
+                >
+                  Cancel shopping
+                </button>
+              }
+            </div>
+          </div>
         </div>
       </div>
     );

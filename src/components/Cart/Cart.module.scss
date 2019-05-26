@@ -3,32 +3,14 @@
 
 .wrapper {
   min-height: 100vh;
-  max-width: 292px;
   background: $light-gray;
-  border-right: 1px solid $black;
-  flex: 1;
   padding: 0 10px;
   @include flexbox(center, flex-start);
 }
 
 .container {
-  position: fixed;
-
-  @include min(sm) {
-    width: 242px;
-  }
-
-  @include min(md) {
-    width: 166px;
-  }
-
-  @include min(lg) {
-    width: 222px;
-  }
-
-  @include min(xl) {
-    width: 262px;
-  }
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .title {
