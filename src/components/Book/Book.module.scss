@@ -2,7 +2,7 @@
 @import "../../scss/mixins.scss";
 
 .item {
-  padding: 20px 10px;
+  padding: 10px 0;
   margin: 10px 0;
   display: flex;
   justify-content: center;
@@ -31,19 +31,24 @@
   margin: 0;
   font-size: 12px;
 
-  @include min(md) {
+  @include min(sm) {
     font-size: 16px;
   }
 }
 
-.author {
+.author,
+.price {
   margin: 0;
   margin-bottom: 10px;
   font-size: 10px;
 
-  @include min(md) {
+  @include min(sm) {
     font-size: 14px;
   }
+}
+
+.price {
+  font-weight: bold;
 }
 
 .button {
