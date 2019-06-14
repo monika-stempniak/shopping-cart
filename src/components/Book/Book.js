@@ -7,6 +7,16 @@ import { API_URL } from '../../constans';
 import styles from './Book.module.scss';
 
 class Book extends React.Component {
+  state = {
+    user: null,
+  }
+
+  componentDidMount() {
+    const login = localStorage.getItem('login');
+    this.setState({
+      user: login,
+    })
+  }
 
   onAddToCart = async () => {
     const token = localStorage.getItem('token');
@@ -35,7 +45,18 @@ class Book extends React.Component {
         console.log(error.message);
       }
     }
+  }
+
+  onDelete = async () => {
+    const { _id, updateBooks } = this.props;
+
+    try {
+      await Axios.delete(`${API_URL}/books/${_id}`);
+      updateBooks(_id);
+    } catch (error) {
+      console.log(error.message);
     }
+  }
 
 
   render() {
@@ -54,15 +75,28 @@ class Book extends React.Component {
         <p className={styles.title}>{title}</p>
         <p className={styles.author}>{author}</p>
         <p className={styles.price}>{price} PLN</p>
-        <button 
-          type="button" 
-          className={classnames("btn", "btn-outline-dark", styles.button)}
-          id={_id}
-          onClick={this.onAddToCart}
-          disabled={isDisabled}
-        >
-          Add to cart
-        </button>
+        {
+          this.state.user === "admin" ?
+            <button 
+              type="button" 
+              className={classnames("btn", "btn-outline-danger", styles.button)}
+              id={_id}
+              onClick={this.onDelete}
+              disabled={isDisabled}
+            >
+              Delete
+            </button>
+            :
+            <button 
+              type="button" 
+              className={classnames("btn", "btn-outline-dark", styles.button)}
+              id={_id}
+              onClick={this.onAddToCart}
+              disabled={isDisabled}
+            >
+              Add to cart
+            </button>
+        }
       </div>
     );
   }

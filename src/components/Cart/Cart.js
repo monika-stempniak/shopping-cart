@@ -6,7 +6,6 @@ import { API_URL } from '../../constans';
 import CartItem from "../CartItem/CartItem";
 
 import styles from './Cart.module.scss';
-import { timingSafeEqual } from 'crypto';
 
 class Cart extends React.Component {
   state = {

@@ -1,10 +1,9 @@
 @import "../../scss/variables.scss";
-@import "../../scss/mixins.scss";
 
 .wrapper {
+  composes: container from global;
   min-height: 100vh;
   flex-direction: column;
-  composes: container from global;
 }
 
 .row {

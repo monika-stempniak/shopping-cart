@@ -1,0 +1,15 @@
+@import "../../scss/variables.scss";
+
+.wrapper {
+  composes: container from global;
+  margin-top: 50px;
+  min-height: 100vh;
+}
+
+.buttonWrapper {
+  text-align: center;
+}
+
+.button {
+  width: 50%;
+}

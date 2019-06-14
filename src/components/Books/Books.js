@@ -28,6 +28,14 @@ class Books extends React.Component {
     }
   }
 
+  updateBooks = (id) => {
+    const { books } = this.state;
+
+    this.setState({
+      books: books.filter(book => book._id !== id )
+    })
+  }
+
   render() {
     const { books } = this.state;
 
@@ -45,10 +53,7 @@ class Books extends React.Component {
                 <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={book._id}>
                   <Book
                     {...book}
-                    // updateBooks={updateBooks}
-                    // updateCart={updateCart}
-                    // userId={userId}
-                    // checkUserID={checkUserID}
+                    updateBooks={this.updateBooks}
                   />
                 </div>
               ))

@@ -29,10 +29,11 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// http://localhost:4000/books
-router.post('/', async (req, res) => {
+// http://localhost:4000/books/new
+router.post('/new', async (req, res) => {
     try {
-        const book = new Book(req.body);
+        console.log(req.body.newBook);
+        const book = new Book(req.body.newBook);
         await book.save();
         res.status(201).send(book);
     } catch (error) {
@@ -47,6 +48,18 @@ router.put('/:id', async (req, res) => {
         const book = await Book.findById(id);
         Object.assign(book, req.body);
         await book.save();
+        res.send(book);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+// http://localhost:4000/books/id
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const book = await Book.findById(id);
+        await Book.deleteOne(book);
         res.send(book);
     } catch (error) {
         res.status(500).send(error);
