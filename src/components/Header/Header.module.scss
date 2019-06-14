@@ -1,3 +1,35 @@
+@import "../../scss/main.scss";
+
 .active {
-  color: red;
+  border: 1px solid white;
+}
+
+.wrapper {
+  background: $orange;
+  width: 100vw;
+  padding: 15px 0;
+}
+
+.navbar {
+  composes: container from global;
+  @include flexbox(space-between, center);
+}
+
+.navbarNav {
+  @include flexbox(center, center);
+  list-style: none;
+  margin: 0;
+}
+
+.navLink {
+  color: white;
+  padding: 10px 30px;
+  margin-left: 10px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: white;
+    color: $orange;
+    text-decoration: none;
+  }
 }
