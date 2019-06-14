@@ -10,7 +10,7 @@ const app = express();
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(dbMiddleware);
 app.use('/books', booksRouter);
-app.use('/cart', cartRouter);
+app.use('/', cartRouter);
 app.use('/user', userRouter);
 
 const PORT = 4000;

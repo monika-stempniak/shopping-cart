@@ -12,9 +12,8 @@ class CartItem extends React.Component {
     const { _id, updateCart } = this.props;
 
     try {
-      const response = await Axios.delete(`${API_URL}/cart/${_id}`);
-      const data = await response.data;
-      data && updateCart(_id);
+      await Axios.delete(`${API_URL}/cart/${_id}`);
+      updateCart(_id);
     } catch (error) {
       console.log(error.message);
     }

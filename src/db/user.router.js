@@ -28,7 +28,7 @@ router.post('/login', async (req, res, next) => {
                 return next(new Error('Invalid login'));
             }
 
-            res.send({ userId: user._id});
+            res.send({ id: user._id, token: "XYZ"});
         });
     } catch (error) {
         res.status(500).send(error);

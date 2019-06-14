@@ -14,9 +14,22 @@ import NewBook from '../NewBook/NewBook';
 import Header from '../Header/Header';
 import NotFound from '../NotFound/NotFound';
 
+
 class App extends React.Component {
   state = {
     user: null,
+  }
+
+  componentDidMount() {
+    const id = localStorage.getItem('id');
+    const login = localStorage.getItem('login');
+
+    this.setState({ 
+      user: {
+        id,
+        login,
+      }
+    })
   }
 
   checkUserLogin = async (passedLogin) => {
@@ -25,10 +38,15 @@ class App extends React.Component {
 
       try {
         const response = await Axios.post(`${API_URL}/user/login`, user);
-        const data = await response.data;
-        data && this.setState({ 
+        const { id, token } = await response.data;
+
+        localStorage.setItem(`token`, token);
+        localStorage.setItem(`id`, id);
+        localStorage.setItem(`login`, passedLogin);
+
+        this.setState({ 
           user: {
-            id: data.userId,
+            id,
             login: passedLogin,
           }
         })
@@ -50,6 +68,7 @@ class App extends React.Component {
   }
 
   onLogout = () => {
+    localStorage.clear();
     this.setState({ 
       user: null
     })
@@ -58,24 +77,25 @@ class App extends React.Component {
   render() {
     const { user } = this.state;
 
-    console.log(user);
-
     return (
       <Router>
         <Header user={user}>
-          {user 
+          {user && (user.id || user.login)
             ? (
-              <button 
-                type="button" 
-                className={classnames("btn", "btn-warning")}
-                onClick={this.onLogout}
-              >
-                Logout
-              </button>
+              <React.Fragment>
+                <button 
+                  type="button" 
+                  className={classnames("btn")}
+                  onClick={this.onLogout}
+                >
+                  Logout
+                </button>
+                <i>Hello, {user.login}!</i>
+              </React.Fragment>
             ) : (
               <button 
                 type="button" 
-                className={classnames("btn", "btn-warning")}
+                className={classnames("btn")}
                 onClick={this.onLogin}
               >
                 Login

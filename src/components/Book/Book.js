@@ -9,23 +9,34 @@ import styles from './Book.module.scss';
 class Book extends React.Component {
 
   onAddToCart = async () => {
-    const { _id, title, author, series, price } = this.props;
+    const token = localStorage.getItem('token');
+    const id = localStorage.getItem('id');
 
-    const data = {
-      book_id: _id,
-      title,
-      author,
-      amount: 1,
-      series,
-      price,
+    if (!token) {
+      alert("You must log in");
+    } else {
+
+      const { _id, title, author, series, year, price } = this.props;
+  
+      const data = {
+        user_id: id,
+        book_id: _id,
+        title,
+        author,
+        amount: 1,
+        series,
+        year,
+        price,
+      }
+  
+      try {
+        await Axios.post(`${API_URL}/cart`, data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
     }
 
-    try {
-      await Axios.post(`${API_URL}/cart`, data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
 
   render() {
     const { _id, title, author, amount, series, price } = this.props;
