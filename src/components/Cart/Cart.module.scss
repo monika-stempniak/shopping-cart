@@ -3,14 +3,13 @@
 
 .wrapper {
   min-height: 100vh;
-  background: $light-gray;
-  padding: 0 10px;
-  @include flexbox(center, flex-start);
+  flex-direction: column;
+  composes: container from global;
 }
 
-.container {
-  max-width: 400px;
-  margin: 0 auto;
+.row {
+  composes: row from global;
+  justify-content: center;
 }
 
 .title {
@@ -23,5 +22,6 @@
   text-transform: uppercase;
   margin-top: 30px;
   font-size: 14px;
+  text-align: center;
   width: 100%;
 }
